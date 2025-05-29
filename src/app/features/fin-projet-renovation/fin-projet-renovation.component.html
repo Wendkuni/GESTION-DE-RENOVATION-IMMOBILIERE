@@ -1,0 +1,75 @@
+
+<div fxLayout="row wrap">
+    <div class="table-bouton-ajout">
+        <mat-button-toggle-group appearance="legacy">
+            <button (click)="openDialog()" mat-raised-button color="primary">cloturer un projet de renovation</button>
+        </mat-button-toggle-group>
+    </div>
+        <!--<div class="recherche">
+            <mat-form-field class="recherche">
+                <input matInput  placeholder="Rechercher generale..." >
+                <mat-icon matSuffix >clear</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>indice de recherche</mat-label>
+                <mat-select >
+                    <mat-option [value]="'budget'"></mat-option>
+                    <mat-option *ngFor="let e of elementRecheche" [value]="e">{{e}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>-->
+  </div>
+
+    <div fxLayout="column" fxLayout.gt-sm="row wrap" *ngIf="!isLoadingResults">
+        <div fxFlex="32" class="flex-p" *ngFor="let p of projet  | paginate: { itemsPerPage: 6, currentPage: page }"> 
+            <mat-card class="custom-card">
+                    <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+                        <mat-card-title  class="m-0"><h3><button mat-button> Projet {{p.projetRenovation.renovation.nomRenovation}}</button></h3></mat-card-title>
+                        <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                    </mat-card-header>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item color="warn" (click)="supprimerRenovation(p.id)">
+                          <mat-icon>delete</mat-icon>
+                          <span>Supprimer</span>
+                        </button>
+                      </mat-menu>
+                <mat-card-content class="p-">
+                <mat-divider></mat-divider>
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>face</mat-icon>  
+                        <span> <strong><i>Client : </i> {{p.projetRenovation.renovation.client.email}}</strong></span>
+                    </p>
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>local_atm</mat-icon>  
+                        <span> <strong><i>Budget : </i> {{p.projetRenovation.budget}} euros</strong></span>
+                    </p>
+                    <p fxLayout="row"  class="infor">
+                        <mat-icon>timer</mat-icon>  
+                        <span> <strong><i>Durée :</i> {{p.projetRenovation.dateDemarrage| date:'dd/MM/yyyy'}} - {{p.projetRenovation.dateFinission| date:'dd/MM/yyyy'}}</strong></span>
+                    </p>
+                    
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>location_on</mat-icon>  
+                        <span> <strong><i>Adresse : </i> {{p.projetRenovation.renovation.adressChantier}}</strong></span>
+                    </p>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <p fxLayout="row"  class="infor">
+                    <mat-icon>timer</mat-icon>  
+                    <span> <strong><i>Date cloture :</i> {{p.dateCloture| date:'dd/MM/yyyy'}}</strong></span>
+                </p>
+            </mat-card>
+        </div>
+    </div>
+
+<div fxLayout="row wrap" *ngIf="projet">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card class="p-0 text-center">           
+            <pagination-controls class="gradus-pagination" autoHide="true" maxSize="4" (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>

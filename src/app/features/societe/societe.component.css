@@ -1,0 +1,43 @@
+.example-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-form-field {
+  font-size: 15px;
+  width: 80%;
+  color: black;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.table-bouton-ajout {
+  margin-right: 7px;
+}
+
+.recherche {
+  width: 80%;
+}
+/*# sourceMappingURL=societe.component.css.map */

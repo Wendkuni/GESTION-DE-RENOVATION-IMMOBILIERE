@@ -1,0 +1,105 @@
+<mat-sidenav-container class="body">
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="h-100">
+  
+         <div  fxFlex="80" fxFlex.gt-sm="40" fxFlex.sm="80">
+  
+              <mat-card class="p-0 mat-elevation-z24 box">
+                  <div fxLayout="column" fxLayoutAlign="center center" class="bg-primary box-header">
+                      <img width="150px" height="120px" src="./assets/logo.png">
+                      
+                  </div>
+                  <mat-card-content fxLayout="column" fxLayoutAlign="end center" class="box" >
+                      <mat-card class="form-card" fxLayout="column"  class="mat-elevation-z12 box-content-inner">
+                          <span class="titre">Inscription</span>  
+                            <form [formGroup]="formIns" #f="ngForm">
+                                <div fxLayoutAlign="satrt" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                                    <span [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                                      <mat-form-field appearance="outline" class="w-100" >
+                                          <mat-label>Nom</mat-label>
+                                            <input matInput placeholder="Nom" formControlName="nom">
+                                            <mat-error *ngIf="formIns.controls.nom.errors?.required">Nom ne doit pas etre vide</mat-error>                               
+                                        </mat-form-field>
+                                    </span>
+                                    <span [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                                      <mat-form-field class="form-fiel" appearance="outline" class="w-100" >
+                                          <mat-label>Prenom</mat-label>
+                                            <input matInput placeholder="Prenom" formControlName="prenom">
+                                            <mat-error *ngIf="formIns.controls.prenom.errors?.required">Prenom ne doit pas etre vide</mat-error> 
+                                        </mat-form-field>
+                                    </span>
+                                </div>
+                                  <span fxLayoutAlign="start">
+                                     <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Email</mat-label>
+                                          <input matInput placeholder="Email" formControlName="email" >
+                                          <mat-error *ngIf="formIns.controls.email.errors?.required">Email ne doit pas etre vide</mat-error> 
+                                          <mat-error *ngIf="formIns.controls.email.hasError('invalidEmail')">Mail Invalide</mat-error>
+                                          <mat-error *ngIf="formIns.controls.email.hasError('invalidEmail')">Email invalide</mat-error>
+                                      </mat-form-field>
+                                  </span>
+                              <div fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                                  <span [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Password</mat-label>
+                                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                        <mat-error *ngIf="formIns.controls.password.errors?.required">Password doit pas etre vide</mat-error>
+                                        <mat-error *ngIf="formIns.controls.password.hasError('minlength')">La taille minimum est de 6 caractere</mat-error>
+                                     </mat-form-field>
+                                  </span>
+                                  <span [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                                    <mat-form-field appearance="outline" class="w-100" >
+                                        <mat-label>Validation Password</mat-label>
+                                        <input matInput formControlName="passwordValid" [type]="hidev ? 'password' : 'text'">
+                                        <button mat-icon-button matSuffix (click)="hidev = !hidev" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidev">
+                                        <mat-icon>{{hidev ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                        <mat-error *ngIf="formIns.controls.passwordValid.errors?.required">Password doit pas etre vide</mat-error>
+                                        <mat-error *ngIf="formIns.controls.passwordValid.hasError('minlength')">La taille minimum est de 6 caractere</mat-error>
+                                      </mat-form-field>
+                                  </span>
+                              </div>
+                            </form>
+                          <div fxLayout="row" fxLayoutAlign="start">
+                            <p>J'aimerais <a mat-button routerLink="/login">me connecter</a></p>
+                          </div>
+                      </mat-card>
+                      <button mat-raised-button color="primary" (click)="onSubmit()"  class="mat-elevation-z12 box-button" type="submit">S'Inscrire</button>
+                  </mat-card-content>
+                    <mat-card>
+                        <h3 class="reaseau-head">s'inscrire avec </h3>
+                        <mat-card-content >
+                            <div class="reseau" fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                                <button (click)="signInWithGoogle()" [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button  class="mat-elevation-z12 box-button">
+                                  <img  width="30px" height="30px" src="./assets/icones/google.png">
+                                     Google
+                                    </button>
+                                <button (click)="signInWithFB()" [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button  class="mat-elevation-z12 box-button">
+                                  <img  width="30px" height="30px" src="./assets/icones/facebook.png">
+                                  Facebook</button>
+                              </div>
+            
+                              <!-- <div class="reseau" fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+
+                                <button [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button  class="mat-elevation-z12 box-button">
+                                  <img  width="30px" height="30px" src="./assets/icones/twitter.png">
+                                  Twitter</button>
+
+                                <button [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button class="mat-elevation-z12 box-button">
+                                  <img  width="30px"  src="./assets/icones/linkedin.png">
+                                  Linkedin</button>
+                              </div> -->
+                        </mat-card-content>
+                    </mat-card>
+              </mat-card>
+            </div>
+    </div>
+  
+  </mat-sidenav-container>

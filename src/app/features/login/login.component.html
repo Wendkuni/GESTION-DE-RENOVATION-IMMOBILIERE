@@ -1,0 +1,84 @@
+<mat-sidenav-container >
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="h-100">
+  
+         <form [formGroup]="form"  fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+  
+              <mat-card class="p-0 mat-elevation-z24 box">
+                  <div fxLayout="column" fxLayoutAlign="center center" class="bg-primary box-header">
+                      <img width="150px" height="120px" src="./assets/logo.png">
+                      
+                  </div>
+                  <mat-card-content fxLayout="column" fxLayoutAlign="end center" class="box-content">
+                      <mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z12 box-content-inner">
+                          <span class="titre">Connexion</span>  
+                          <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Username</mat-label>
+                              <input matInput placeholder="Email" formControlName="email">
+                              <mat-error *ngIf="form.controls.email.errors?.required">Email ne doit pas etre vide</mat-error>
+                              <mat-error *ngIf="form.controls.email.hasError('invalidEmail')">Email invalide</mat-error>
+                          </mat-form-field>
+                          <mat-form-field appearance="outline" class="w-100">
+                              <mat-label>Password</mat-label>
+                              <mat-icon matPrefix>lock</mat-icon>
+                            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+
+                              <mat-error *ngIf="form.controls.password.errors?.required">password ne doit pas etre vide</mat-error>
+                              <mat-error *ngIf="form.controls.password.hasError('minlength')">La longueur du mot de passe est de 6 caractere minimum</mat-error>
+                          </mat-form-field>
+                          <div fxLayout="row" fxLayoutAlign="start">
+
+                          </div>
+                      </mat-card>
+                      <button mat-raised-button color="primary" (click)="onSubmit()" class="mat-elevation-z12 box-button" type="submit">Connexion</button>
+                  </mat-card-content>
+                  <div fxLayout="row" fxLayoutAlign="start">
+                    <mat-card-content class="inscription">
+                        <p>J'aimerais <a mat-button routerLink="/login/inscription">m'inscrire</a></p>
+                    </mat-card-content>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="center">
+                    <mat-card-content class="inscription">
+                        <p><a mat-button routerLink="/login/forgetpassword">mot de passe oublier</a></p>
+                    </mat-card-content>
+                  </div>
+                    <mat-card>
+                        <h3 class="reaseau-head">se connecter avec </h3>
+                        <mat-card-content >
+                            <div class="reseau" fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                                <button (click)="signInWithGoogle()" [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button  class="mat-elevation-z12 box-button">
+                                  <img  width="30px" height="30px" src="./assets/icones/google.png">
+                                     Google
+                                    </button>
+                                <button (click)="signInWithFB()" [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button  class="mat-elevation-z12 box-button">
+                                  <img  width="30px" height="30px" src="./assets/icones/facebook.png">
+                                  Facebook</button>
+                              </div>
+<!--             
+                              <div class="reseau" fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+
+                                <button [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button  class="mat-elevation-z12 box-button">
+                                  <img  width="30px" height="30px" src="./assets/icones/twitter.png">
+                                  Twitter</button>
+
+                                <button [fxFlex.xs]="45" [fxFlex.sm]="45" [fxFlex.md]="45" [fxFlex.lg]="45" [fxFlex.xl]="45"
+                                  mat-raised-button class="mat-elevation-z12 box-button">
+                                  <img  width="30px"  src="./assets/icones/linkedin.png">
+                                  Linkedin</button>
+
+                              </div> -->
+                        </mat-card-content>
+                    </mat-card>
+              </mat-card>
+              
+          </form>    
+    
+    </div>
+  
+  </mat-sidenav-container>

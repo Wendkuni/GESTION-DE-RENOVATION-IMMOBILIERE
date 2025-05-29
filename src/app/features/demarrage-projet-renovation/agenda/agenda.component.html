@@ -1,0 +1,92 @@
+
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+</div>
+<div fxLayout="row wrap" *ngIf="!isLoadingResults" >
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card class="block p-0">
+            <div class="bg-primary">
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center"  class="w-100">            
+                    <div class="">                
+                        <button mat-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                            <mat-icon *ngIf="!settings.rtl">chevron_left</mat-icon>
+                            <mat-icon *ngIf="settings.rtl">chevron_right</mat-icon>
+                        </button>
+                        <button mat-icon-button mwlCalendarToday [(viewDate)]="viewDate">
+                            <mat-icon>today</mat-icon>
+                        </button>
+                        <button mat-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                            <mat-icon *ngIf="settings.rtl">chevron_left</mat-icon>
+                            <mat-icon *ngIf="!settings.rtl">chevron_right</mat-icon>
+                        </button>
+                    </div>
+                    <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
+                    <div class="">
+                        <button 
+                        matTooltip="Afficher la liste des taches sur l'agenda"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                        mat-icon-button (click)="viewTache()">
+                            <mat-icon>ballot</mat-icon>
+                        </button>
+                        <button 
+                        matTooltip="Afficher la liste de evenements"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                        mat-icon-button (click)="viewAgenda()">
+                            <mat-icon>event_note</mat-icon>
+                        </button>
+                        <button mat-icon-button
+                        matTooltip="Afficher en fonction des mois"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                        (click)="view = 'month'">
+                            <mat-icon>view_comfy</mat-icon>
+                        </button>
+                        <button mat-icon-button
+                        matTooltip="Afficher en fonction de la semaine"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                        (click)="view = 'week'">
+                            <mat-icon>view_week</mat-icon>
+                        </button>
+                        <button 
+                        matTooltip="Afficher en fonction du jour"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                        mat-icon-button (click)="view = 'day'">
+                            <mat-icon>view_day</mat-icon>
+                        </button>
+                        <button *ngIf="isGestion>0" mat-icon-button (click)="openScheduleDialog(null)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>            
+            </div>
+
+            <div [ngSwitch]="view">
+                <mwl-calendar-month-view
+                    *ngSwitchCase="'month'"
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    [refresh]="refresh"
+                    [activeDayIsOpen]="activeDayIsOpen"
+                    (dayClicked)="dayClicked($event.day)">
+                </mwl-calendar-month-view>
+                <mwl-calendar-week-view
+                    *ngSwitchCase="'week'"
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    [refresh]="refresh">
+                </mwl-calendar-week-view>
+                <mwl-calendar-day-view
+                    *ngSwitchCase="'day'"
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    [refresh]="refresh">
+                </mwl-calendar-day-view>
+            </div>
+
+       </mat-card>
+    </div>
+</div>

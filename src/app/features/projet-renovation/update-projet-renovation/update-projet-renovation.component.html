@@ -1,0 +1,70 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<!-- <div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h2 *ngIf="data.menu">Modifier Un Menu</h2>
+    <h2 *ngIf="!data.menu">AJouter Un Menu</h2>
+</div> -->
+
+
+<mat-card *ngIf="!isLoadingResults">
+    <mat-card-content>
+        <form [formGroup]="projetRenovation">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                    <mat-label>Budget total reserver pour le projet</mat-label>
+                    <input matInput type="number" #input formControlName="budget">
+                    <span matSuffix ><b>euros</b></span>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                
+                    <mat-label>date de debut et de fin</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate formControlName="dateDemarrage" placeholder="Start date">
+                      <input matEndDate formControlName="dateFinission" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  
+                    <!-- <mat-error *ngIf="range.controls.dateDemarrage.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="range.controls.dateFinition.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
+            </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <ng-select class="select"  [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100" [items]="listeRenovation"
+                   bindLabel="nomRenovation"
+                   placeholder="Selectionner Selectionner la renovation"
+                   formControlName="renovation">
+                   <ng-template ng-loadingspinner-tmp>
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </ng-template>
+            </ng-select>
+            </div>
+            <div fxLayout="row" *ngIf="img!='' && photo.value" fxLayoutAlign="center center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <div fxLayoutAlign="center end" class="content-container" *ngIf="id>0" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+                    <img class="image" src="{{URLpage}}{{img.split('/')[2]}}"><br/>
+                    <b><p>Image actuellement utiliser</p></b>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                
+                <div class="content-container" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+                    <dropzone class="dropzone-container" [fxFlex]="100" [config]="config" [message]="'Cliquez ou faites glisser la pièce ici jointe'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)">
+                    </dropzone>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="warn" routerLink="/projet-renovation"  >Annuler</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">Enregistrer</button>
+    </mat-card-actions>
+</mat-card>

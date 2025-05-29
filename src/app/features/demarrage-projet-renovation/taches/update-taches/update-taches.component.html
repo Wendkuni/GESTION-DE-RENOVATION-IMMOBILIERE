@@ -1,0 +1,69 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3 *ngIf="data.tache">Modifier Une tache</h3>
+    <h3 *ngIf="!data.tache">AJouter Une tache</h3>
+</div>
+<div mat-dialog-content *ngIf="!isLoadingResults">
+    <form [formGroup]="tacheForm">
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>appellation de la tache</mat-label>
+                <input matInput #input  placeholder="Ex. Nougat"  formControlName="appellation">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            
+
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                
+                    <mat-label>date de debut et de fin</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate formControlName="dateDemarrage" placeholder="Start date">
+                      <input matEndDate formControlName="dateFinition" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  
+                    <!-- <mat-error *ngIf="range.controls.dateDemarrage.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="range.controls.dateFinition.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
+            </mat-form-field>
+
+            <ng-select class="select"  [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100" [items]="userList"
+                   bindLabel="utilisateurs.email"
+                   placeholder="Selectionner l'utilisateur pour la tache"
+                   formControlName="utilisateur">
+                   <ng-template ng-loadingspinner-tmp>
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+
+        <div fxLayout="row" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Description de la tache</mat-label>
+                <textarea matInput placeholder="Description de la tache" formControlName="description" maxlength="300"></textarea>
+                
+            </mat-form-field>
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Budget reserver pour la tache</mat-label>
+                <input matInput type="number" #input formControlName="sommeTache" max="80000000" min="0">
+                <span matSuffix ><b>euros</b></span>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="tacheForm.value" >Annuler</button>
+        <button mat-raised-button (click)="onSubmit()" [disabled]="tacheForm.invalid" color="primary" >Enregistrer</button>
+    </div>
+</div>

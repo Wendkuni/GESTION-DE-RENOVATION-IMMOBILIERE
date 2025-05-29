@@ -1,0 +1,59 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h2 *ngIf="data.menu">Modifier Un Menu</h2>
+    <h2 *ngIf="!data.menu">AJouter Un Menu</h2>
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="menuForm">
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Title</mat-label>
+                <input matInput #input  placeholder="Ex. Nougat"  formControlName="title">
+                <mat-error *ngIf="menuForm.controls.title.errors?.required">title doit pas etre vide</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>routerLink</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="routerLink">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>href</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="href"  >
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Icon</mat-label>
+                <input matInput #input placeholder="Icon" formControlName="icon">
+                
+            </mat-form-field>
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                
+                <mat-label>parentId</mat-label>
+                <mat-select formControlName="parentId">
+                    <mat-option [value]="0">0</mat-option>
+                    <mat-option *ngFor="let ele of data.list" [value]="ele.id">
+                    {{ele.title}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <div appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-slide-toggle formControlName="hasSubMenu">est un sous menus</mat-slide-toggle>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="menuForm.value" >Annuler</button>
+        <button mat-raised-button (click)="onSubmit()" color="primary" >Enregistrer</button>
+    </div>
+</div>

@@ -1,0 +1,238 @@
+<div fxLayout="row wrap">
+    <div fxFlex="100" class="flex-p">
+        <mat-accordion>
+                    <mat-expansion-panel expanded hideToggle>
+                        <mat-expansion-panel-header>
+                        <mat-panel-title>
+                           <h3>Critere Extraction</h3>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-divider></mat-divider>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                            <mat-checkbox 
+                                [color]="'primary'" 
+                                (change)="optionAnnee=$event.checked"
+                                [checked]="optionAnnee" 
+                                class="example-margin">Analyse selon les années </mat-checkbox>
+                            <ng-select *ngIf="optionAnnee" class="select"  [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100" [items]="dateYear"
+                                placeholder="Selectionner l'année de demarrage"
+                                [(ngModel)]="anneeDebut">
+                                <ng-template ng-loadingspinner-tmp>
+                                    <div class="lds-ellipsis">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </ng-template>
+                            </ng-select>
+                            <ng-select *ngIf="optionAnnee" class="select"  [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100" [items]="dateYear"
+                                placeholder="Selectionner l'année de demarrage"
+                                [(ngModel)]="anneeFin">
+                                <ng-template ng-loadingspinner-tmp>
+                                    <div class="lds-ellipsis">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </ng-template>
+                            </ng-select>
+                            
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                        <mat-checkbox 
+                            [color]="'primary'" 
+                            (change)="optionMois=$event.checked"
+                            [checked]="optionMois" 
+                            class="example-margin">Analyse selon les mois </mat-checkbox>
+                            <mat-form-field appearance="outline" *ngIf="optionMois">
+                                <mat-label>mois de depart chantier</mat-label>
+                                <mat-select [(ngModel)]="moisDebut">
+                                    <mat-option></mat-option>
+                                    <mat-option [value]="option.id" *ngFor="let option of MOIS">{{ option.name }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" *ngIf="optionMois">
+                                <mat-label>mois de cloture chantier</mat-label>
+                                <mat-select [(ngModel)]="moisFin">
+                                    <mat-option></mat-option>
+                                    <mat-option [value]="option.id" *ngFor="let option of MOIS">{{ option.name }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                            <mat-checkbox 
+                            [color]="'primary'" 
+                            (change)="optionClient=$event.checked"
+                            [checked]="optionClient" 
+                            class="example-margin">Analyse selon les clients</mat-checkbox>
+                            <mat-form-field appearance="outline" *ngIf="optionClient">
+                                <mat-label>mail de client</mat-label>
+                                <input matInput [(ngModel)]="nomClient" (keyup)="rechercheOptionClient(projet, nomClient)">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                            <mat-checkbox 
+                                [color]="'primary'" 
+                                (change)="optionBudget=$event.checked"
+                                [checked]="optionBudget" 
+                                class="example-margin">Analyse selon le budget</mat-checkbox>
+                            <mat-form-field appearance="outline" *ngIf="optionBudget">
+                                <mat-label>entre le bugdet</mat-label>
+                                <input matInput [(ngModel)]="budget">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" *ngIf="optionBudget">
+                                <mat-label>Critere </mat-label>
+                                <mat-select [(ngModel)]="budgetCritere">
+                                    <mat-option value="egale">egale</mat-option>
+                                    <mat-option value="superieure">superieure</mat-option>
+                                    <mat-option value="inferieure">inferieure</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                            <button mat-raised-button 
+                            (click)="recherche()" color="primary" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50" >
+                                Rechercher
+                            </button>
+                        </div>
+                    </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
+
+<div fxLayout="row wrap" *ngIf="!isLoadingResults">
+    <div fxFlex="100" class="flex-p">
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab label="Statistique en fonction de la durée">
+  <div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>nombre de projet realiser en fonction des années</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div class="w-100 h-300p">
+                <ngx-charts-line-chart
+                    [scheme]="colorScheme"
+                    [results]="donneeAnnee"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabelAnnee"
+                    [yAxisLabel]="yAxisLabel"
+                    [autoScale]="autoScale">
+                </ngx-charts-line-chart>                  
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" class="flex-p">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>nombre de projet realiser en fonction des mois</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div class="w-100 h-300p">
+                <ngx-charts-area-chart
+                    [scheme]="colorScheme"
+                    [results]="donneeMois"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabelMois"
+                    [yAxisLabel]="yAxisLabel"
+                    [autoScale]="autoScale">
+                </ngx-charts-area-chart>         
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" > 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Rapport total du budget des projets realisés en fonction des années</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div class="w-100 h-300p">
+                <ngx-charts-bar-vertical
+                      [scheme]="colorScheme"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabelAnnee"
+                      [yAxisLabel]="yAxisLabelBudget"
+                      [results]="listBudgetAnnee">
+                </ngx-charts-bar-vertical>                  
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Rapport total du budget des projets realisés en fonction des mois</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div class="w-100 h-300p">
+                <ngx-charts-bar-vertical
+                      [scheme]="colorScheme"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabelMois"
+                      [yAxisLabel]="yAxisLabelBudget"
+                      [results]="listBudgetMois">
+                </ngx-charts-bar-vertical>                  
+            </div>
+        </mat-card>
+    </div>
+    
+</div>
+
+  </mat-tab>
+  <mat-tab label="Statistique en fonction du buget">
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Rapport total du budget des projets realisés en fonction des années</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div fxLayoutAlign="center center">
+                <ngx-charts-advanced-pie-chart
+                    [scheme]="colorRapprot"
+                    [results]="listBudgetAnnee"
+                    [gradient]="gradient">
+                </ngx-charts-advanced-pie-chart>         
+            </div>
+        </mat-card>
+    </div>
+     <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Rapport total du budget des projets realisés en fonction des mois</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div fxLayoutAlign="center center">
+                <ngx-charts-advanced-pie-chart
+                    [scheme]="colorRapprot"
+                    [results]="listBudgetMois"
+                    [gradient]="gradient">
+                </ngx-charts-advanced-pie-chart>         
+            </div>
+        </mat-card>
+    </div>
+</div>
+  </mat-tab>
+</mat-tab-group>
+    </div>
+</div>
+

@@ -1,0 +1,16 @@
+.mat-snack-bar-error-message {
+  width: 500px;
+  padding-right: 20px;
+}
+
+.mat-menu-item-action {
+  height: 30px;
+  line-height: 30px;
+}
+
+.mat-menu-item-action .material-icons {
+  font-size: 22px;
+  padding: 0px;
+  margin-right: 0px;
+}
+/*# sourceMappingURL=snackbar.component.css.map */

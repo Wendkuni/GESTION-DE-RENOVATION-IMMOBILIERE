@@ -1,0 +1,58 @@
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Rapport de depense</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div fxLayoutAlign="center center">
+                <ngx-charts-advanced-pie-chart
+                    [scheme]="colorRapprot"
+                    [results]="listeRapport"
+                    [gradient]="gradient"
+                    (select)="onSelect($event)">
+                </ngx-charts-advanced-pie-chart>         
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card >
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Statistique de l'impact de la tache en fonction du Budget total du projet</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div fxLayoutAlign="center center">
+                <ngx-charts-pie-grid
+                [scheme]="colorScheme"
+                [results]="single"
+                (select)="onSelect($event)">
+            </ngx-charts-pie-grid>           
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center center">                
+                <mat-card-subtitle><h2>Statistique des Taches en fonction des Primes des Taches</h2></mat-card-subtitle>
+            </mat-card-header>
+            <div  fxLayoutAlign="center center" >
+                <ngx-charts-bar-vertical
+                      [scheme]="colorScheme"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel"
+                      [results]="single"
+                      (select)="onSelect($event)">
+                </ngx-charts-bar-vertical>                  
+            </div>
+        </mat-card>
+    </div>
+</div>

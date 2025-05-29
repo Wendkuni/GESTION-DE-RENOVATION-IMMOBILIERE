@@ -1,0 +1,51 @@
+.titre{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+.reseau{
+    padding: 5px;
+    button{
+        padding: 5px;
+        color: rgba(14, 14, 161, 0.767);
+        font-weight: bold;
+    }
+}
+.inscription{
+    padding-left: 15px;
+}
+
+.reaseau-head{
+
+    text-align: center;
+    color: rgba(14, 14, 161, 0.986);;
+    font-size: 20px;
+    font-weight: 200px;
+}
+
+.box{
+    width: 100%;
+    .form-card{
+        width: 80%;
+    }
+}
+
+.form-fiel{
+    width: 100%;
+    input{
+        width: 100%;
+    }
+}
+
+@media (max-height: 768px) and (max-width: 1024px){
+    .reseau{
+        padding: 0px;
+        button{
+            color: rgba(14, 14, 161, 0.767);
+            font-weight: bold;
+            margin: 2px;
+        }
+    }
+}

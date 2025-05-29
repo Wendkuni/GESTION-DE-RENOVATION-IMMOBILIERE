@@ -1,0 +1,58 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<div fxLayout="row wrap" *ngIf="!isLoadingResults">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card>
+            <div [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="70" [fxFlex.xl]="70">
+                <h2>Projet {{projet.renovation.nomRenovation | uppercase}}</h2>
+            </div>
+            
+            <div fxLayoutAlign="center end" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="20" [fxFlex.xl]="20">
+                    <button *ngIf="GererUser==1" 
+                        matTooltip="Utilisateur affecter au Projet"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                     button mat-icon-button (click)="openDialog(projet)">
+                        <mat-icon>groups</mat-icon>
+                    </button>
+                    <button mat-icon-button routerLink="bilan"
+                        matTooltip="Diagramme de l'evolution du projet"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                    >
+                        <mat-icon>poll</mat-icon>
+                    </button>
+                    <button mat-icon-button routerLink="agenda"
+                        matTooltip="Agenda d'evenement"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                    >
+                        <mat-icon>event_note</mat-icon>
+                    </button>
+                    <button mat-icon-button routerLink="taches"
+                        matTooltip="Les taches"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip"
+                    >
+                        <mat-icon>ballot</mat-icon>
+                    </button>
+                    <button mat-icon-button routerLink="fichier"
+                        matTooltip="documents"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip">
+                        <mat-icon>insert_drive_file</mat-icon>
+                    </button>
+
+                    <button mat-icon-button routerLink="message"
+                        matTooltip="echange"
+                        matTooltipClass="example-tooltip-red"
+                        aria-label="Button that shows a red tooltip">
+                        <mat-icon>question_answer</mat-icon>
+                    </button>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<router-outlet *ngIf="!isLoadingResults"></router-outlet>

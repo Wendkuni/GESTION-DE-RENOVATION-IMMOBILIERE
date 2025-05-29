@@ -1,0 +1,68 @@
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3>Cloturer un projet de renovation</h3>
+</div>
+<div mat-dialog-content>
+    <div *ngIf="isLoadingResults" fxLayout="row"  fxLayoutAlign="center center" fxLayout.lt-md="row wrap">
+        <div projetRenovation="app-spinner" > 
+            <mat-spinner color="primary"></mat-spinner>  
+            <h4>Chargement...</h4>
+        </div>
+    </div>
+    <form *ngIf="!isLoadingResults"  [formGroup]="projetRenovation">
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <ng-select class="select"  [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100" [items]="listeRenovation"
+                bindLabel="renovation.nomRenovation"
+                placeholder="Selectionner la renovation"
+                formControlName="projetRenovation">
+                <ng-template ng-loadingspinner-tmp>
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+
+        <div *ngIf="projetRenovation.get('projetRenovation').value !=null">
+            <mat-card class="custom-card">
+                    <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+                        <mat-card-title  class="m-0"><h3><button mat-button>Informations du projet</button></h3></mat-card-title>
+                        <button mat-icon-button><mat-icon></mat-icon></button>
+                    </mat-card-header>
+                <mat-card-content class="p-">
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>face</mat-icon>  
+                        <span> 
+                        <strong><i>Client : </i> 
+                        {{projetRenovation.get('projetRenovation').value.renovation.client.email}} 
+                        ({{projetRenovation.get('projetRenovation').value.renovation.client.nom}} 
+                        {{projetRenovation.get('projetRenovation').value.renovation.client.prenom}})
+                        </strong></span>
+                    </p>
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>local_atm</mat-icon>  
+                        <span> <strong><i>Budget : </i> {{projetRenovation.get('projetRenovation').value.budget}} euros</strong></span>
+                    </p>
+                    <p fxLayout="row"  class="infor">
+                        <mat-icon>timer</mat-icon>  
+                        <span> <strong><i>Durée :</i> {{projetRenovation.get('projetRenovation').value.dateDemarrage| date:'dd/MM/yyyy'}} - {{projetRenovation.get('projetRenovation').value.dateFinission| date:'dd/MM/yyyy'}}</strong></span>
+                    </p>
+                    
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>location_on</mat-icon>  
+                        <span> <strong><i>Adresse : </i> {{projetRenovation.get('projetRenovation').value.renovation.adressChantier}}</strong></span>
+                    </p>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+            </mat-card>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="projetRenovation.value" >Annuler</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="projetRenovation.invalid">Enregistrer</button>
+    </div>
+</div>

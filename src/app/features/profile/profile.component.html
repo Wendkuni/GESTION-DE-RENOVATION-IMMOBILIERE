@@ -1,0 +1,21 @@
+<span *ngIf="!isLoad">
+    <span *ngIf="Utilisateur.profile.libelle =='CLIENT'" >
+        <app-client-view [client]="Utilisateur"></app-client-view>
+    </span>
+    <span *ngIf="Utilisateur.societe && Utilisateur.civilite">
+        <app-autre-user [user]="Utilisateur"></app-autre-user>
+    </span>
+    <span *ngIf=" !Utilisateur.societe && Utilisateur.civilite">
+        <app-personnel-entreprise [user]="Utilisateur"></app-personnel-entreprise>
+    </span>
+
+    
+</span>
+
+<span fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoad">
+    <div id="app-spinner" [class.hide]="true"> 
+        <mat-spinner color="primary"></mat-spinner>  
+        <h4>Chargement...</h4>
+    </div>
+</span>
+

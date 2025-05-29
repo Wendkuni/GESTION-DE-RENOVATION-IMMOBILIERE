@@ -1,0 +1,43 @@
+.titre {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.body {
+  background-image: url("./../../../assets/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.reseau {
+  padding: 5px;
+}
+
+.reseau button {
+  padding: 5px;
+  color: rgba(14, 14, 161, 0.767);
+  font-weight: bold;
+}
+
+.inscription {
+  padding-left: 15px;
+}
+
+.reaseau-head {
+  text-align: center;
+  color: rgba(14, 14, 161, 0.986);
+  font-size: 20px;
+  font-weight: 200px;
+}
+
+@media (max-height: 768px) and (max-width: 1024px) {
+  .reseau {
+    padding: 0px;
+  }
+  .reseau button {
+    color: rgba(14, 14, 161, 0.767);
+    font-weight: bold;
+    margin: 2px;
+  }
+}
+/*# sourceMappingURL=login.component.css.map */

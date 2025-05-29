@@ -1,0 +1,122 @@
+@import "../../../theme/styles/variables";
+
+.imgProfile{
+    padding: 5px;
+    border-radius: 0px 50px 50px 50px ;
+}
+
+.imgProfile-moi{
+    border-radius: 10px 0px 10px 10px ;
+}
+
+.chat{
+    .chat-actions{
+        padding: 12px;
+    }
+    .author-name{
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .talk-item{
+        padding: 6px 0;
+        height: 100%;
+    }
+    .message{
+        white-space: unset;
+        text-overflow: unset;       
+        span{
+            padding: 6px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 14px;
+        }
+    }
+    .message-date{
+        opacity: 0.8;
+        text-align: right;
+        margin-right: 17%;
+    }
+
+    .message-date-moi{
+        opacity: 0.8;
+        text-align: left;
+        margin-left: 17%;
+    }
+    .empty{
+        mat-icon{
+            font-size: 220px;
+            height: 220px;
+            width: 220px;
+            opacity: 0.4;
+        }
+        p{
+            font-size: 18px;
+            opacity: 0.8;
+        }
+    }
+}
+.chat-status-icon{
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+    line-height: 22px;
+    margin-right: 6px;
+}
+.author-status{
+    font-size: 13px;
+}
+.chat-sidenav{
+    border-right: 1px solid transparent;
+    overflow: hidden;
+    width: 250px;   
+}
+.chat-content{
+    padding: 12px;
+    height: calc(100vh - (#{$toolbar-height} + #{$inner-sidenav-content-padding}*2 + 238px));
+}
+.chat-sidenav-list {
+    height: calc(100vh - (#{$toolbar-height} + #{$inner-sidenav-content-padding}*2 + 134px));
+}
+
+.date-moi{
+    background-color: rgba(77, 71, 71, 0);
+    width: 100%;
+}
+
+.chat-separe{
+    margin-bottom: 10px;
+    background-color: rgba(236, 239, 245, 0.753);
+}
+
+.contenu-sms{
+    padding: 10px;
+}
+h3{
+    padding: 10px;
+}
+
+.reponse{
+    border-top: 3px solid rgba(4, 4, 131, 0.733);
+    border-left: 3px solid rgba(4, 4, 131, 0.733);
+    border-right: 3px solid rgba(4, 4, 131, 0.733);;
+    background-color: rgba(67, 151, 123, 0.651);
+    padding: 5px;
+    .body{
+        background-color: rgba(182, 162, 162, 0.295);
+        padding: 5px;
+    }
+}
+
+.reponseSmsAutre{
+    background-color:  rgb(115, 236, 111);
+    padding: 2.5px;
+    margin-bottom: 10px;
+}
+.colorReponse{
+    float: left;
+    width: 10px;
+    height: 46px;
+    padding-right: 10px;
+    margin-right: 10px;
+    background-color: rgb(13, 161, 8);
+}

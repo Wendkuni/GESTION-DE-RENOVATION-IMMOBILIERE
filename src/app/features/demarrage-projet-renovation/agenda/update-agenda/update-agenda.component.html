@@ -1,0 +1,52 @@
+<h3 mat-dialog-title><span *ngIf="!data.agenda">Ajouter un</span><span *ngIf="data.agenda">Modifier l'</span> Evenement</h3>
+
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+<div mat-dialog-content *ngIf="!isLoadingResults">
+    <form [formGroup]="form">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Titre</mat-label>
+          <input matInput placeholder="Title" formControlName="motif">
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Date debut</mat-label>
+          <input matInput type="datetime-local" placeholder="Start Date" formControlName="dateDemarrage">
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Date fin</mat-label>
+          <input matInput type="datetime-local" placeholder="End Date" formControlName="dateFinition">
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>coleur representant l'evenement</mat-label>
+          <input matInput placeholder="coleur representant l'evenement" type="color" formControlName="color">
+        </mat-form-field>
+
+        <ng-select class="select" class="w-100" [items]="userList"
+                bindLabel="utilisateurs.email"
+                [multiple]="true"
+                placeholder="Selectionner l'utilisateur pour la tache"
+                formControlName="utilisateurs">
+                <ng-template ng-loadingspinner-tmp>
+                <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </ng-template>
+        </ng-select>
+        
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Description de la racontre</mat-label>
+            <textarea matInput placeholder="Description de la racontre" formControlName="description" maxlength="300"></textarea>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!isLoadingResults">
+    <button mat-raised-button color="primary" (click)="enregistrer()" [disabled]="!form.valid"><span *ngIf="!data.agenda">Save</span><span *ngIf="data.agenda">Update</span></button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="form.value">Cancel</button>
+</div>

@@ -1,0 +1,149 @@
+<div class="container" >
+    <div class="timeline">
+        <div class="timeline-section" >
+            <div class="timeline-date">
+                Date souhaité pour le demarrage : {{renovation.dateDemarrage | date:'dd-MM-YYYY' }}
+                <!-- {{historique.dateAction | date:'dd/MM/yyyy HH:mm:ss'}} -->
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="timeline-box">
+                        <div class="bg-primary p-1">
+                            Information du Client (e)
+                            <!-- {{historique?.etatInitial?.libelle || "CREATION"}} à {{historique.etatFinal.libelle}} -->
+                        </div>
+                        <div class="box-content">
+
+                            <mat-list>
+                                <div mat-subheader>Information sur l'exécuteur</div>
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>perm_identity</mat-icon>
+                                    <div mat-line> <strong>Nom </strong> : {{client.nom}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>face</mat-icon>
+                                    <div mat-line><strong>Prenom</strong> : {{client.prenom}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item" >
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Email</strong> : {{client.email}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item" >
+                                    <mat-icon mat-list-icon>call</mat-icon>
+                                    <div mat-line> <strong>Contact</strong> : {{client.contact}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item" >
+                                    <mat-icon mat-list-icon>business</mat-icon>
+                                    <div mat-line> <strong>Socièté</strong> : {{client.societe}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item" >
+                                    <mat-icon mat-list-icon>access_time</mat-icon>
+                                    <div mat-line> <strong>Heure à contacté</strong> : {{client.heureAContacter}} </div>
+                                </mat-list-item>
+
+                                <mat-divider></mat-divider>
+                            </mat-list>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="timeline-box">
+                        <div class="bg-primary p-1">
+                            BUDGET
+                            <!-- {{historique?.etatInitial?.libelle || "CREATION"}} à {{historique.etatFinal.libelle}} -->
+                        </div>
+                        <div class="box-content">
+
+                            <mat-list>
+                                <div mat-subheader>Information sur l'exécuteur</div>
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Avez-vous obtenu vos financements ?</strong> : {{renovation.avoirFinancement}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line><strong>Quel est votre budget travaux ?</strong> : {{renovation.budgetTravaux}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item" >
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Faites-vous appel à un financement public ?</strong> : {{renovation.avoirFinancement}} </div>
+                                </mat-list-item>
+                                <mat-list-item class="custom-list-item" >
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Avez-vous effectuer un plan de financement ?</strong> : {{renovation.aeffectuerPlanFinance}} </div>
+                                </mat-list-item>
+
+                                <mat-divider></mat-divider>
+                            </mat-list>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="timeline-box">
+                        <div class="bg-primary p-1">
+                            LE PROJET DE RENOVATION
+                            <!-- {{historique?.etatInitial?.libelle || "CREATION"}} à {{historique.etatFinal.libelle}} -->
+                        </div>
+                        <div class="box-content">
+
+                            <mat-list>
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Type de bien ?</strong> : {{renovation.typeBien}} </div>
+                                </mat-list-item>
+
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Surface au sol de votre bien ?</strong> :{{renovation.surfaceSol}} </div>
+                                </mat-list-item>
+
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>account_tree</mat-icon>
+                                    <div mat-line> <strong>Nombre de pièce</strong> : {{renovation.nombrePiece}} </div>
+                                </mat-list-item>
+                                
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>date_range</mat-icon>
+                                    <div mat-line> <strong>Date de démarrage souhaité</strong> : {{renovation.dateDemarrage}} </div>
+                                </mat-list-item>
+
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>turned_in</mat-icon>
+                                    <div mat-line> <strong>Niveau de finition souhaité</strong> : {{renovation.niveauFinition}} </div>
+                                </mat-list-item>
+
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>turned_in</mat-icon>
+                                    <div mat-line> <strong>Souhaitez-vous effectuer une rénovation RT-2012, RT 2020, RGE</strong> : {{renovation.typeRenovation}} </div>
+                                </mat-list-item>
+
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>work</mat-icon>
+                                    <div mat-line> <strong>Type de gamme des appareillages</strong> : {{renovation.gammeAppareillages}} </div>
+                                </mat-list-item>
+
+                                <mat-list-item class="custom-list-item">
+                                    <mat-icon mat-list-icon>contact_support</mat-icon>
+                                    <div mat-line> <strong>Modification prévue des pièces (création, agrandissement, etc.?</strong> : {{renovation.modificationPrevu}} </div>
+                                </mat-list-item>
+
+                                <mat-divider></mat-divider>
+                            </mat-list>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

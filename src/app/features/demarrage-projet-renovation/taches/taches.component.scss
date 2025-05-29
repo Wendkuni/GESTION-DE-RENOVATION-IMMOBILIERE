@@ -1,0 +1,213 @@
+.example-container {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 25px 25px 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .containe{
+      width: 100%;
+  }
+  .example-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+    
+    width: 100%;
+  }
+  
+  .example-box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .valider{
+      border-left: 6px solid rgb(9, 172, 115);
+      color: rgb(9, 172, 115);
+      margin-bottom: 5px;
+      font-weight: bold;
+  }
+
+  .init{
+    border-left: 6px solid  rgb(34, 6, 194);
+    color: rgb(34, 6, 194);
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .encours{
+    border-left: 6px solid  rgb(236, 139, 11);
+    color: rgb(236, 139, 11);
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .revoir{
+    border-left: 6px solid  rgb(236, 11, 105);
+    color: rgb(236, 11, 105);
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .header-card {
+      width: 100%;
+  }
+
+  .example-container {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 8px;
+  }
+  
+  .mat-table-sticky-border-elem-right {
+    border-left: 1px solid #e0e0e0;
+  }
+  
+  .mat-table-sticky-border-elem-left {
+    border-right: 1px solid #e0e0e0;
+  }
+
+  .user-name {
+    padding: 0 12px;
+    font-weight: 400;
+}
+
+.user-content {
+    padding: 10px;
+    .user-img {
+        position: relative;
+        img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            &.blocked {
+                opacity: 0.5;
+            }
+        }
+        .mat-icon {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            font-size: 96px;
+            height: 96px;
+            width: 96px;
+        }
+    }
+    .mat-slide-toggle {
+        margin-top: 15px;
+    }
+    .user-details {
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .mat-icon {
+            padding: 2px 10px;
+        }
+        &.blocked {
+            opacity: 0.5;
+        }
+    }
+}
+
+.user-search {
+    width: 0;
+    overflow: hidden;
+    transition: 0.3s;
+    .mat-form-field {
+        width: 100% !important;
+        text-align: center !important;
+        height: 36px;
+    }
+    .mat-form-field-infix {
+        padding: 5px;
+    }
+    .mat-input-element {
+        text-align: center;
+    }
+    &.show {
+        width: 100%;
+        overflow: visible;
+    }
+}
+.example-full-width {
+  width: 60%;
+  cursor: pointer;
+}
+
+.mat-row:nth-child(even){
+    background-color:rgba(8, 106, 235, 0.247);
+    }
+
+.mat-row:nth-child(odd){
+    background-color:rgba(252, 249, 249, 0.116);
+    }
+
+    th.mat-sort-header-sorted {
+        color: red;
+      }
+
+
+      .recherche{
+        width: 80%;
+      }
+
+.button-add{
+    padding: 20px;
+}
+
+p{
+  text-align: left;
+  font-size: 10px;
+  padding: 5px;
+}

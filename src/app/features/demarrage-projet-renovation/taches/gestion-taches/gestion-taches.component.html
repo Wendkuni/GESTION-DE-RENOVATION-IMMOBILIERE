@@ -1,0 +1,32 @@
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3 *ngIf="data.tache">tache : {{tache.appellation}}</h3>
+</div>
+<div mat-dialog-content>
+   
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <div 
+        [fxFlex.xs]="100" [fxFlex.sm]="100" 
+        [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+        <b> <i> Personne assigné : </i>{{tache.utilisateur.utilisateurs.nom}} {{tache.utilisateur.utilisateurs.prenom}} </b>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <div 
+        [fxFlex.xs]="100" [fxFlex.sm]="100" 
+        [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+        <b><i>Durée :</i> {{tache.dateDemarrage | date : 'dd LLLL yyyy'}} - {{tache.dateFinition | date : 'dd LLLL yyyy'}}</b>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <div 
+        [fxFlex.xs]="100" [fxFlex.sm]="100" s
+        [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+            <p><b><i>Description :</i></b> <br/> {{tache.description}}</p>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+        <h2>Modifier Le Profile</h2>
+    </div>
+    <div mat-dialog-content *ngIf="!isLoadingResults">
+        <form [formGroup]="clientForm" enctype="multipart/form-data" >
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <div *ngIf="image">
+                    <img class="profile-img" src="{{image}}" alt="user-image" width="100" class="rounded mat-elevation-z6">
+                </div>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-md="row wrap">
+                <input mat-raised-button type="file" (change)="onSelect($event)" placeholder="Changer sa photo de profile">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                    <mat-label>Email</mat-label>
+                    <input matInput #input maxlength="10" placeholder="Ex. Nougat" [value]="client.email" readonly>
+                    
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                    <mat-label>Nom</mat-label>
+                    <input matInput #input placeholder="Ex. Nougat" formControlName="nom" required>
+                    <mat-error *ngIf="clientForm.get('nom').touched && clientForm.get('nom').invalid" >
+                        <p>Champs obligatoire, cet champs doit pas etre vide</p>
+                      </mat-error> 
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                    <mat-label>Prenom</mat-label>
+                    <input matInput #input placeholder="Ex. Nougat" formControlName="prenom" required>
+                    <mat-error *ngIf="clientForm.get('prenom').touched && clientForm.get('prenom').invalid">
+                        <p>Champs obligatoire, cet champs doit pas etre vide</p>
+                      </mat-error> 
+                  </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                    <mat-label>Sociéte</mat-label>
+                    <input matInput #input placeholder="Ex. Nougat" formControlName="societe">
+                    
+                </mat-form-field>
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                    <mat-label>Contact</mat-label>
+                    <span matPrefix>+33 &nbsp;</span>
+                    <input matInput #input type="number" placeholder="Ex. Nougat" formControlName="contact">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                  <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                        <mat-label>Status Familiale</mat-label>
+                        <mat-select disableRipple formControlName="statusFamiliale" required>
+                            <mat-option >--SELECT--</mat-option>
+                            <mat-option value="Mr">Mr</mat-option>
+                            <mat-option value="Mme">Mme</mat-option>
+                            <mat-option value="Mesdamoiselle">Mesdamoiselle</mat-option>
+                        </mat-select>
+                   </mat-form-field>
+                  <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                        <mat-label>Heure à Joindre</mat-label>
+                        <mat-select formControlName="heureAContacter">
+                          <mat-option >Je sais pas</mat-option>
+                          <mat-option value="Tout Moment">Tout Moment</mat-option>
+                          <mat-option value="MATIN">Matin</mat-option>
+                          <mat-option value="APRES MIDI">Apres Midi</mat-option>
+                          <mat-option value="FIN DE JOURNEE">Fin de Journée</mat-option>
+                        </mat-select>
+                  </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+                <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+                      <mat-label>Adresse du client</mat-label>
+                      <input matInput formControlName="adresse">
+                </mat-form-field>
+          </div>
+        </form>
+    </div>
+    <div mat-dialog-actions align="end" *ngIf="!isLoadingResults">
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <button mat-raised-button color="warn" [mat-dialog-close]="clientForm.value" >Annuler</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()" >Enregistrer</button>
+        </div>
+    </div>

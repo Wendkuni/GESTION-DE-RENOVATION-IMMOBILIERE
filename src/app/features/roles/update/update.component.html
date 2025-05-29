@@ -1,0 +1,39 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h2 *ngIf="data.role">Modifier Un role</h2>
+    <h2 *ngIf="!data.role">AJouter Un role</h2>
+</div>
+<div mat-dialog-content>
+    <form  [formGroup]="rolesForm">
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+            
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Libelle</mat-label>
+                <input matInput #input  placeholder="Ex. Nougat"  formControlName="libelle">
+                <mat-error *ngIf="rolesForm.controls.libelle.errors?.required">Libelle doit pas etre vide</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Name</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="name"  >
+                <mat-error *ngIf="rolesForm.controls.name.errors?.required">Libelle doit pas etre vide</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Type</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="type"  >
+                <mat-error *ngIf="rolesForm.controls.type.errors?.required">Libelle doit pas etre vide</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="rolesForm.value" >Annuler</button>
+        <button mat-raised-button [disabled]="rolesForm.invalid" (click)="onSubmit()" color="primary" >Enregistrer</button>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+
+<!--<div fxLayout="row wrap">
+        <div class="recherche">
+            <mat-form-field class="recherche">
+                <input matInput  placeholder="Rechercher generale..." >
+                <mat-icon matSuffix >clear</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>indice de recherche</mat-label>
+                <mat-select >
+                    <mat-option [value]="'budget'"></mat-option>
+                    <mat-option *ngFor="let e of elementRecheche" [value]="e">{{e}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+  </div>-->
+
+    <div fxLayout="column" fxLayout.gt-sm="row wrap" >
+        <div fxFlex="32" class="flex-p" *ngFor="let p of projet  | paginate: { itemsPerPage: 6, currentPage: page }"> 
+            <mat-card class="custom-card">
+                <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+                    <mat-card-title  class="m-0"><h3><button mat-button routerLink="{{p.id}}/">{{p.renovation.nomRenovation}}</button></h3></mat-card-title>
+                </mat-card-header>
+                <img class="image" mat-card-image src="{{URLpage}}{{p.photo.split('/')[2]}}" alt="image non charger">
+                <mat-card-content class="p-">
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>face</mat-icon>  
+                        <span> <strong><i>Client : </i> {{p.renovation.client.email}}</strong></span>
+                    </p>
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>local_atm</mat-icon>  
+                        <span> <strong><i>Budget : </i> {{p.budget}} euros</strong></span>
+                    </p>
+                    <p fxLayout="row"  class="infor">
+                        <mat-icon>timer</mat-icon>  
+                        <span> <strong><i>Durée :</i> {{p.dateDemarrage| date:'dd/MM/yyyy'}} - {{p.dateFinission| date:'dd/MM/yyyy'}}</strong></span>
+                    </p>
+                    
+                    <p fxLayout="row" class="infor">
+                        <mat-icon>location_on</mat-icon>  
+                        <span> <strong><i>Adresse : </i> {{p.renovation.adressChantier}}</strong></span>
+                    </p>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions fxLayoutAlign="end center">
+                    <button routerLink="{{p.id}}/bilan" mat-icon-button
+                    matTooltip="DIagramme d'evolution"
+                    matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip">
+                        <mat-icon>poll</mat-icon>
+                    </button>
+                    <button mat-icon-button routerLink="{{p.id}}/agenda"
+                    matTooltip="Agenda"
+                    matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip">
+                        <mat-icon>event_note</mat-icon>
+                    </button>
+
+                    <button routerLink="{{p.id}}/taches" mat-icon-button
+                    matTooltip="Taches"
+                    matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip">
+                        <mat-icon>ballot</mat-icon>
+                    </button>
+                    
+                    <button mat-icon-button 
+                    matTooltip="documents"
+                    matTooltipClass="example-tooltip-red"
+                    aria-label="Button that shows a red tooltip">
+                        <mat-icon>insert_drive_file</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+<div fxLayout="row wrap" *ngIf="projet">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card class="p-0 text-center">           
+            <pagination-controls class="gradus-pagination" autoHide="true" maxSize="3" (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>

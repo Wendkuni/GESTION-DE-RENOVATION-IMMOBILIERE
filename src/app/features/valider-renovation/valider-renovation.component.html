@@ -1,0 +1,67 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+    <div fxLayout="row wrap">
+    <!-- <div fxFlex="100" class="flex-p" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="50" [fxFlex.lg]="35" [fxFlex.xl]="25">
+        <div class="sycad-table-bouton-ajout">
+            <mat-button-toggle-group appearance="legacy">
+                <mat-button-toggle  class="bg-primary" routerLink="update/null">
+                    <mat-icon>add_circle_outline</mat-icon>
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div> -->
+
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card class="p-0 mailbox">
+            <mat-sidenav-container>
+                <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="mailbox-sidenav mat-elevation-z1">
+                    <mat-toolbar color="primary" class="p-0" fxLayout="row" fxLayoutAlign="space-between center">
+                        <input  type="text" [(ngModel)]="rechercheGeneral" (keyup)="recherche()" placeholder="Recherche general..." class="search mat-elevation-z3">                                    
+                    </mat-toolbar>
+                    <mat-nav-list class="p-0 mailbox-sidenav-list" perfectScrollbar>
+                        <div *ngFor="let j of dataSource.filteredData" (click)="selectRenovation(j)">
+                            <mat-list-item [ngClass]="{'unread': j.nomRenovation, 'selected': renovationSelect==j}">
+                                <div matLine fxLayout="row" fxLayoutAlign="space-between space-between">   
+                                    <h4 class="text-truncate sender">{{j.nomRenovation}}</h4> 
+                                    <small>{{j.dateDemarrage}}</small> 
+                                </div>
+                                <p matLine class="text-truncate subject">{{j.typeBien}}</p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>                        
+                    </mat-nav-list>
+                </mat-sidenav>              
+                <div>
+                    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+                        <div  fxLayout="row" fxLayoutAlign="start center">
+                                <button mat-icon-button (click)="sidenav.toggle()">
+                                    <mat-icon>blur_on</mat-icon>
+                                </button>
+                        </div>
+                    </mat-toolbar> 
+                    <div class="mailbox-content" perfectScrollbar>
+                    
+                        <mat-divider></mat-divider>
+                        <mat-card class="chat-actions" *ngIf="renovationSelect"> 
+                          <mat-tab-group mat-align-tabs="center">
+                              <mat-tab label="QUESTIONNAIRES">
+                                  <span *ngIf="renovationSelect">
+                                      <app-view-and-valider-questionnaire [renovation]="renovationSelect"></app-view-and-valider-questionnaire>
+                                  </span>
+                              </mat-tab>
+                              <mat-tab label="JUSTIFICATIFS">
+                                  <span *ngIf="renovationSelect">
+                                      <app-view-and-valider-files [renovation]="renovationSelect"></app-view-and-valider-files>
+                                  </span>
+                              </mat-tab>
+                            </mat-tab-group>
+                        </mat-card>
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>            
+            </mat-sidenav-container>
+        </mat-card>
+    </div>
+</div>

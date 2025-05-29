@@ -1,0 +1,43 @@
+<div class="toolbar-dropdown-menu user-menu">
+    <!--<span (mouseleave)="userMenuTrigger.closeMenu()">-->
+        <mat-toolbar color="primary">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+                <img *ngIf="client.imgUrl" class="profile-img" src="{{client.imgUrl}}" alt="user-image" width="100px" class="rounded">
+                <p><b>{{client.email}}</b></p>
+            </div>  
+        </mat-toolbar>
+        <mat-card class="information">
+            <p fxLayout="row"  class="infor">
+                <mat-icon>perm_identity</mat-icon>  
+                <span> <strong><i>Nom :</i> {{client.nom}}</strong></span>
+            </p>
+            <p fxLayout="row" class="infor">
+                <mat-icon>face</mat-icon>  
+                <span> <strong><i>Prenom : </i> {{client.prenom}}</strong></span>
+            </p>
+            <p fxLayout="row" class="infor">
+                <mat-icon> business</mat-icon>  
+                <span> <strong><i>Sociéte : </i> {{client.societe}}</strong></span>
+            </p>
+            <p fxLayout="row" class="infor">
+                <mat-icon> call</mat-icon>  
+                <span> <strong><i>Contact : </i> {{client.contact}}</strong></span>
+            </p>
+            <p fxLayout="row"  class="infor">
+                <mat-icon>wc</mat-icon>  
+                <span> <strong><i>Status Familiale : </i> {{client.statusFamiliale}}</strong></span>
+            </p>
+            <p fxLayout="row" class="infor">
+                <mat-icon>access_time</mat-icon>  
+                <span> <strong><i>Heure à Joindre : </i> {{client.heureAContacter}}</strong></span>
+            </p>
+            <div class="divider"></div>
+            <mat-card-actions align="end" class="action-modif">
+                <button mat-raised-button color="primary" (click)="openDialog()" >Modifier</button>
+            </mat-card-actions>
+
+        </mat-card>
+    <!--</span>-->
+</div>
+
+

@@ -1,0 +1,69 @@
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3 *ngIf="data.role">Modifier Un Societe</h3>
+    <h3 *ngIf="!data.role">AJouter Un Societe</h3>
+</div>
+<div mat-dialog-content>
+    
+    <div *ngIf="listTypeSociete.length<=0" fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-md="row wrap">
+        <h3>La liste du types de societe est vide</h3>
+    </div>
+    <form *ngIf="listTypeSociete.length>0"  [formGroup]="societeForm">
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+            
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Nom De la Societe</mat-label>
+                <input matInput #input  placeholder="Ex. Nougat"  formControlName="nomSociete">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Siret</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="siret"  required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Adresse</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="adresse"  required>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Email</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="email"  required>
+            </mat-form-field>
+            <ng-select [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50" [items]="listTypeSociete"
+                   bindLabel="appellation"
+                   [multiple]="true"
+                   placeholder="Selectionner Type Societe"
+                   formControlName="typeSociete">
+            </ng-select>
+
+
+           
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap" >
+            
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Contact</mat-label>
+                <input matInput #input placeholder="Ex. Nougat" formControlName="contact"  required>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-select formControlName="typeSociete">
+                    <mat-option *ngFor="let r of listTypeSociete" value="{{r}}">
+                        {{r.appellation}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="societeForm.value" >Annuler</button>
+        <button mat-raised-button (click)="onSubmit()" color="primary" >Enregistrer</button>
+    </div>
+</div>

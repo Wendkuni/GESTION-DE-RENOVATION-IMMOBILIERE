@@ -1,0 +1,34 @@
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3 fxLayoutAlign="center center" mat-dialog-title >Evenement : {{event.motif}}</h3>
+</div>
+<div mat-dialog-content>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <div 
+        [fxFlex.xs]="100" [fxFlex.sm]="100" 
+        [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+        <b><i>Durée :</i> {{event.dateDemarrage | date : 'dd LLLL yyyy HH:mm'}} - {{event.dateFinition | date : 'dd LLLL yyyy HH:mm'}}</b>
+        </div>
+    </div><br/>
+
+    <div fxLayout="column"  mat-dialog-title color="primary">
+        <h5 fxLayoutAlign="center center">Utilisateurs Assignés à l'evenement</h5>
+        <div [fxFlex.xs]="100" [fxFlex.sm]="100" 
+        [fxFlex.md]="100" [fxFlex.lg]="100" [fxFlex.xl]="100">
+        <span *ngFor="let user of event.utilisateurs">
+            <h6>utilisateur <i> : </i>{{user.utilisateurs.nom | uppercase}} {{user.utilisateurs.prenom}} ({{user.utilisateurs.email}})</h6>
+        </span>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <div 
+        [fxFlex.xs]="100" [fxFlex.sm]="100" 
+        [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+            <p><b><i>Description :</i></b> <br/> {{event.description}}</p>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" mat-dialog-close>Fermer</button>
+    </div>
+</div>

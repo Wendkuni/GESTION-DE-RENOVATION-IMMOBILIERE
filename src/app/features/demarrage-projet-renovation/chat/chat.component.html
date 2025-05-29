@@ -1,0 +1,118 @@
+<div fxLayout="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card class="p-0 chat">
+            <mat-sidenav-container>
+            
+              <div>
+                  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                          <h3>Messagerie </h3>
+                      </div>
+                  </mat-toolbar>
+                  <div class="chat-content" perfectScrollbar>
+                      <mat-list *ngIf="talks" class="p-0" >
+                          <div *ngFor="let talk of MessageListe" class="talk-item">
+                             <div fxLayoutAlign="end end" fxLayout="row" fxLayout.lt-md="row wrap" >
+                                <div class="imgProfile-moi chat-separe" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="80" [fxFlex.lg]="80" [fxFlex.xl]="80" *ngIf="talk.utilisateur.id==idUser" >
+                                    <h3 fxLayoutAlign="start center" [ngClass]="'bg-primary'" >Vous</h3>
+                                     <div class="contenu-sms">
+                                        <div *ngIf="talk.reponseSms && talk.reponseSms!=0 && retrouveChat(talk.reponseSms) ">
+                                            <div class="colorReponse">
+
+                                            </div>
+                                            <div *ngIf="afficheSmsReponse!=null" class="reponseSmsAutre">
+                                                <h4>
+                                                    <i>
+                                                        <span *ngIf="afficheSmsReponse.utilisateur.id != idUser">{{afficheSmsReponse.utilisateur.email}}</span>
+                                                        <span *ngIf="afficheSmsReponse.utilisateur.id == idUser">Vous</span>
+                                                    </i>
+                                                </h4>
+                                                {{afficheSmsReponse.contenu}}
+                                            </div>
+                                        </div>
+                                         {{talk.contenu}}
+                                     </div>
+                                     <div class="date-moi">
+                                        <button [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="50" [fxFlex.lg]="30" [fxFlex.xl]="30"  fxLayoutAlign="start end" mat-button (click)="repondreSms(talk)">
+                                            repondre
+                                       </button>
+                                         <span fxLayoutAlign="end end" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="50" [fxFlex.lg]="70" [fxFlex.xl]="70" >
+                                            <p>{{talk.dateEnvoyer | date:"dd MMMM, yyyy 'à' HH:mm"}}</p>
+                                         </span>
+                                         
+                                     </div>
+                                 </div> 
+                             </div>
+                           
+                             <div fxLayoutAlign="start end" fxLayout="row" fxLayout.lt-md="row wrap" >
+                                <div class="imgProfile-moi chat-separe" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="80" [fxFlex.lg]="80" [fxFlex.xl]="80" *ngIf="talk.utilisateur.id!=idUser" >
+                                    <h3 [ngClass]="'bg-warn'" fxLayoutAlign="start center" >{{talk.utilisateur.email}}</h3>
+                                     <div class="contenu-sms">
+                                        <div *ngIf="talk.reponseSms && talk.reponseSms!=0 && retrouveChat(talk.reponseSms) ">
+                                            <div class="colorReponse">
+
+                                            </div>
+                                            <div *ngIf="afficheSmsReponse!=null" class="reponseSmsAutre">
+                                                <h4>
+                                                    <i>
+                                                        <span *ngIf="afficheSmsReponse.utilisateur.id != idUser">{{afficheSmsReponse.utilisateur.email}}</span>
+                                                        <span *ngIf="afficheSmsReponse.utilisateur.id == idUser">Vous</span>
+                                                    </i>
+                                                </h4>
+                                                {{afficheSmsReponse.contenu}}
+                                            </div>
+                                        </div>
+                                         {{talk.contenu}}
+                                     </div>
+                                     <div class="date-moi">
+                                        <button  [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="50" [fxFlex.lg]="30" [fxFlex.xl]="30"  fxLayoutAlign="start end" mat-button (click)="repondreSms(talk)">
+                                            repondre
+                                       </button>
+                                         <span fxLayoutAlign="end end" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="50" [fxFlex.lg]="70" [fxFlex.xl]="70" >
+                                            <p>{{talk.dateEnvoyer | date:"dd MMMM, yyyy 'à' HH:mm"}}</p>
+                                         </span>
+                                         
+                                     </div>
+                                 </div> 
+                             </div>
+                          </div>
+                      </mat-list>
+                      <div *ngIf="!talks" fxLayout="column" fxLayoutAlign="center center" class="h-100 empty">
+                          <mat-icon>chat</mat-icon>            
+                          <p>Select a interlocutor for talk</p>
+                      </div> 
+                  </div>
+                  <mat-divider></mat-divider>
+                  <mat-card class="chat-actions"> 
+                    <div class="reponse" *ngIf="smsRepondre!=null">
+                        <div fxLayout="row" fxLayout.lt-md="row wrap" >
+                            <h4  [fxFlex.xs]="80" [fxFlex.sm]="80" [fxFlex.md]="50" [fxFlex.lg]="30" [fxFlex.xl]="30"><i>Repondre à </i>{{smsRepondre.utilisateur.email}}</h4>
+                            <span fxLayoutAlign="end "  [fxFlex.xs]="20" [fxFlex.sm]="20" [fxFlex.md]="50" [fxFlex.lg]="30" [fxFlex.xl]="30"> 
+                                <mat-icon (click)="fermerReponse()">close</mat-icon> 
+                            </span>
+                        </div>
+                        <div class="body">
+                            <p>
+                               {{smsRepondre.contenu}}
+                            </p>
+                        </div>
+                    </div>
+                      <div fxLayout="row" fxLayoutAlign="space-between center">
+                          <mat-form-field class="w-100">
+                            <textarea matInput placeholder="Enter your text..." (keyup)="entrainEcrire($event)" [(ngModel)]="newMessage"></textarea>
+                          </mat-form-field>
+                          <div fxLayout="row" fxLayoutAlign="scenter center">
+                              <button mat-icon-button type="button">
+                                  <mat-icon>attach_file</mat-icon>
+                              </button>
+                              <button mat-mini-fab color="primary" type="button" (click)="sendMessage(newMessage)">
+                                  <mat-icon>send</mat-icon>
+                              </button>
+                          </div>
+                        </div>
+                  </mat-card>
+              </div>
+            </mat-sidenav-container>
+        </mat-card>
+      </div>
+</div>

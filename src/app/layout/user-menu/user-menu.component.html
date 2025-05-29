@@ -1,0 +1,44 @@
+<span *ngIf="!isLoad">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger" >
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    
+    <mat-menu #userMenu="matMenu" [overlapTrigger]="false" class="toolbar-dropdown-menu user-menu">
+        <!--<span (mouseleave)="userMenuTrigger.closeMenu()">-->
+            <mat-toolbar color="primary">
+                <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info">
+                    <img [src]="userImage" alt="user-image" width="80" class="img-profile rounded mat-elevation-z6">
+                    <p>{{Utilisateur.email}}<br> <small>{{Utilisateur.nom}} {{Utilisateur.prenom}}</small></p>
+                </div>  
+            </mat-toolbar>
+            <a mat-menu-item routerLink="/profile"> 
+                <mat-icon>person</mat-icon>
+                <span>Profile</span> 
+            </a>
+            <!-- <a mat-menu-item routerLink="settings"> 
+                <mat-icon>settings</mat-icon>
+                <span>Settings</span> 
+            </a> -->
+            <a *ngIf="Utilisateur.provider ==null || Utilisateur.provider.trim() ==''"  mat-menu-item (click)="openDialog()"> 
+                <mat-icon>lock</mat-icon>
+                <span>Modifier Password</span> 
+            </a>
+            <!-- <a mat-menu-item routerLink="help"> 
+                <mat-icon>help</mat-icon>
+                <span>Help</span> 
+            </a> -->
+            <div class="divider"></div>
+            <a mat-menu-item (click)="signOut()"> 
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Deconnection</span> 
+            </a>
+        <!--</span>-->
+    </mat-menu>
+</span>
+
+<span fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoad">
+    <div id="app-spinner" [class.hide]="true"> 
+        <mat-spinner color="primary"></mat-spinner>  
+        <h4>Chargement...</h4>
+    </div>
+</span>

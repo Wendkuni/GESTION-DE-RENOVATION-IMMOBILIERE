@@ -1,0 +1,40 @@
+.user-menu .mat-toolbar, .user-menu .mat-toolbar-row {
+  height: 100px !important;
+}
+
+.user-menu .user-info {
+  width: 230px;
+}
+
+.user-menu .user-info p {
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.user-menu .user-info p .profile-img {
+  padding-right: 10px;
+}
+
+.user-menu .mat-menu-item {
+  height: 36px;
+  line-height: 36px;
+}
+
+.information {
+  width: 100%;
+}
+
+.information .infor {
+  font-size: 15px;
+  padding: 10px;
+}
+
+.information .infor mat-icon {
+  margin-right: 10px;
+}
+
+.action-modif {
+  padding: 20px;
+}
+/*# sourceMappingURL=client-view.component.css.map */

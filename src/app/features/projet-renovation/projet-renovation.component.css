@@ -1,0 +1,30 @@
+.element {
+  color: white;
+}
+
+.image {
+  height: 200px;
+}
+
+.example-tooltip-red {
+  background: #080883;
+  font-weight: bold;
+}
+
+.infor {
+  font-size: 13px;
+  padding: 5px;
+}
+
+.infor mat-icon {
+  margin-right: 10px;
+}
+
+.buton-action {
+  float: right;
+}
+
+.recherche {
+  width: 70%;
+}
+/*# sourceMappingURL=projet-renovation.component.css.map */

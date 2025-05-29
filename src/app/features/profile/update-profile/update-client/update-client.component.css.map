@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAA;EACH,KAAK,EAAE,uBAAuB;EAC9B,WAAW,EAAE,IAAI;CACpB",
+    "sources": [
+        "update-client.component.scss"
+    ],
+    "names": [],
+    "file": "update-client.component.css"
+}

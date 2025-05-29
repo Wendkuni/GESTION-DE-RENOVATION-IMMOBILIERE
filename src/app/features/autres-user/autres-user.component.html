@@ -1,0 +1,97 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
+    <div fxLayout="row">
+        <mat-button-toggle-group #controls="matButtonToggleGroup" appearance="legacy">            
+            <mat-button-toggle value="add" (click)="openDialog(null)">
+                <mat-icon>person_add</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="search">
+                <mat-icon>search</mat-icon>
+            </mat-button-toggle>           
+        </mat-button-toggle-group>            
+    </div>
+    <form class="user-search" [class.show]="controls.value == 'search'">
+        <mat-form-field class="user-search-input">
+            <input matInput placeholder="Search user by name..." [(ngModel)]="searchText" name="search">
+        </mat-form-field>
+    </form>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-button-toggle-group #viewType="matButtonToggleGroup" appearance="legacy" value="grid">            
+            <mat-button-toggle value="grid">
+                <mat-icon>view_module</mat-icon>
+            </mat-button-toggle>         
+        </mat-button-toggle-group>
+    </div>
+</div>
+
+<div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
+    <div *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
+        <mat-card class="p-0">  
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 class="user-name">{{user.email}}</h3> 
+                <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="true">
+                <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button mat-menu-item (click)="openDialog(user)" >
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                     <button mat-menu-item (click)="suprimerUser(user.id)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button> 
+                </span>
+            </mat-menu>
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="user.civilite !='Mr'"  src="./assets/img/avatars/avatar-5.png" class="transition-2" >  
+                        <img *ngIf="user.civilite =='Mr'"  src="./assets/img/avatars/avatar-9.png" class="transition-2" >
+                    </div>
+                </div>
+                <div fxFlex="70" fxLayout="column" class="user-details transition-2" [class.blocked]="false">
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">accessibility</mat-icon>
+                        <span><b><i>Civilité</i> : {{user.civilite}}</b></span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">face</mat-icon>
+                        <span><b><i>Appellation</i> : {{user.nom}} {{user.prenom}}</b></span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">call</mat-icon>
+                        <span><b><i>Contact</i> : {{user.contact}}</b></span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">business</mat-icon>
+                        <span><b><i>Societe</i> : {{user.societe.nomSociete}}</b></span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">store_mall_directory</mat-icon>
+                        <span><b><i>Type Societe</i> : {{user.societe.typeSociete.appellation}}</b></span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="muted-text">security</mat-icon>
+                        <span><b><i>Profile</i> : {{user.profile.libelle}}</b></span>
+                    </p>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+
+<div *ngIf="users" fxLayout="row wrap">
+    <div fxFlex="100" class="flex-p"> 
+        <mat-card class="p-0 text-center">           
+            <pagination-controls class="gradus-pagination" autoHide="true" maxSize="3" (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="isLoadingResults" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+</div>
+

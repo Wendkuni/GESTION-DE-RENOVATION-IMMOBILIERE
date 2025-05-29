@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,mBAAmB,CAAC;EAChB,cAAc,EAAE,IAAI;CACvB",
+    "sources": [
+        "app-confirm.component.scss"
+    ],
+    "names": [],
+    "file": "app-confirm.component.css"
+}

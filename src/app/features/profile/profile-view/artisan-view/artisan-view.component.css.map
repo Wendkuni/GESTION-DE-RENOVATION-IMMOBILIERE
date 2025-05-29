@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "artisan-view.component.scss"
+    ],
+    "names": [],
+    "file": "artisan-view.component.css"
+}

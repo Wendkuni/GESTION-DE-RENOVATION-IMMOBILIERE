@@ -1,0 +1,35 @@
+<div class="toolbar-dropdown-menu user-menu">
+    <!--<span (mouseleave)="userMenuTrigger.closeMenu()">-->
+        <mat-toolbar color="primary">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
+                <img *ngIf="user.imgUrl" class="profile-img" src="{{user.imgUrl}}" alt="user-image" width="100px" class="rounded">
+                <p><b>{{user.email}}</b></p>
+            </div>  
+        </mat-toolbar>
+        <mat-card class="information">
+            <p fxLayout="row"  class="infor">
+                <mat-icon>accessibility</mat-icon>  
+                <span> <strong><i>Civilité :</i> {{user.civilite}}</strong></span>
+            </p>
+            <p fxLayout="row"  class="infor">
+                <mat-icon>perm_identity</mat-icon>  
+                <span> <strong><i>Nom :</i> {{user.nom}}</strong></span>
+            </p>
+            <p fxLayout="row" class="infor">
+                <mat-icon>face</mat-icon>  
+                <span> <strong><i>Prenom : </i> {{user.prenom}}</strong></span>
+            </p>
+            <p fxLayout="row" class="infor">
+                <mat-icon> call</mat-icon>  
+                <span> <strong><i>Contact : </i> {{user.contact}}</strong></span>
+            </p>
+            <div class="divider"></div>
+            <mat-card-actions align="end" class="action-modif">
+                <button mat-raised-button color="primary" (click)="openDialog()" >Modifier</button>
+            </mat-card-actions>
+
+        </mat-card>
+    <!--</span>-->
+</div>
+
+

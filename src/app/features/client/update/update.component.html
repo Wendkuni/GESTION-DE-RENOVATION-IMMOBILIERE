@@ -1,0 +1,44 @@
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3 *ngIf="data.menu">Modifier Un utilisateur</h3>
+    <h3 *ngIf="!data.menu">AJouter Un utilisateur</h3>
+</div>
+<div mat-dialog-content>
+    <div *ngIf="isLoadingResults" fxLayout="row"  fxLayoutAlign="center center" fxLayout.lt-md="row wrap">
+        <div id="app-spinner" > 
+            <mat-spinner color="primary"></mat-spinner>  
+            <h4>Chargement...</h4>
+        </div>
+    </div>
+    <form *ngIf="!isLoadingResults"  [formGroup]="user">
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap">
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Email</mat-label>
+                <input matInput #input  placeholder="Email"  formControlName="email">
+            </mat-form-field>
+            
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+         
+            <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+                <mat-label>Status Familiale</mat-label>
+                <mat-select disableRipple formControlName="statusFamiliale" required>
+                    <mat-option >--SELECT--</mat-option>
+                    <mat-option value="Mr">Mr</mat-option>
+                    <mat-option value="Mme">Mme</mat-option>
+                    <mat-option value="Mesdamoiselle">Mesdamoiselle</mat-option>
+                </mat-select>
+           </mat-form-field>
+           <mat-form-field appearance="outline" [fxFlex.xs]="100" [fxFlex.sm]="100" [fxFlex.md]="100" [fxFlex.lg]="50" [fxFlex.xl]="50">
+            <mat-label>Provider</mat-label>
+            <input matInput #input  placeholder="provider"  formControlName="provider">
+        </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="user.value" >Annuler</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="user.invalid">Enregistrer</button>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<!-- <div fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+    <mat-spinner color="primary"></mat-spinner>
+  </div> -->
+
+<div class="header" fxLayout="row" fxLayoutAlign="center center" mat-dialog-title color="primary">
+    <h3 *ngIf="data.file">Modifier un fichier</h3>
+    <h3 *ngIf="!data.file">AJouter un fichier</h3>
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="fileForm">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Description du fichier</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+            <div *ngIf="!data.file" class="content-container" class="w-100">
+                    <dropzone class="dropzone-container" [fxFlex]="100" [config]="config" [message]="'Cliquez ou faites glisser la pièce ici jointe'" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)">
+                    </dropzone>
+            </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayout.lt-md="row wrap" fxLayoutGap.gt-sm="20px">
+        <button mat-raised-button color="warn" [mat-dialog-close]="fileForm.value" >Annuler</button>
+        <button mat-raised-button (click)="onSubmit()" [disabled]="fileForm.invalid" color="primary" >Enregistrer</button>
+    </div>
+</div>
